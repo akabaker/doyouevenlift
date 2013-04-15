@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% if workout.id %}
+    <h1>Edit Workout</h1>
+    <a href="{% url "workouts-delete" pk=workout.id %}">Delete</a>
+    {% else %}
+    <h1>Add Workout</h1>
+    {% endif %}
+    <form action="{{ action }}" method="POST">
+        {% csrf_token %}
+        <ul>
+            {{ form.as_ul }}
+        </ul>
+        <input type="submit" value="Save" />
+    </form>
+    <a href="{% url "workouts-list" %}">back to workouts</a>
+{% endblock %}

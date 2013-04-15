@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if workout.name %}
+    <h1>Edit Workout</h1>
+    {% else %}
+    <h1>Add Workout</h1>
+    {% endif %}
+    <ul>
+        {% for workout in object_list %}
+            <li>{{ workout }}</li> 
+            (<a href="{% url "workouts-edit" pk=workout.id %}">edit</a>)
+        {% endfor %}
+    </ul>
+    <a href="{% url "workouts-new" %}">add workout</a>
+{% endblock %}

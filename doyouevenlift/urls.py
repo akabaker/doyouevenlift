@@ -14,6 +14,8 @@ urlpatterns = patterns('',
         name='workouts-edit'),
     url(r'^delete/(?P<pk>\d+)/$', journal.views.DeleteWorkoutView.as_view(),
         name='workouts-delete'),
+    url(r'^(?P<pk>\d+)/$', journal.views.WorkoutView.as_view(),
+        name='workouts-view'),
     # Examples:
     # url(r'^$', 'doyouevenlift.views.home', name='home'),
     # url(r'^doyouevenlift/', include('doyouevenlift.foo.urls')),

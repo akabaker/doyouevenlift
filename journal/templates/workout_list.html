@@ -7,8 +7,9 @@
     {% endif %}
     <ul>
         {% for workout in object_list %}
-            <li>{{ workout }}</li> 
+            <li><a href="{{ workout.get_absolute_url }}">{{ workout }}</a>
             (<a href="{% url "workouts-edit" pk=workout.id %}">edit</a>)
+            </li>
         {% endfor %}
     </ul>
     <a href="{% url "workouts-new" %}">add workout</a>

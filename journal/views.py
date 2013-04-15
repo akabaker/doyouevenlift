@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.core.urlresolvers import reverse
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from .models import Workout
 
 class ListWorkoutView(ListView):
@@ -46,3 +46,8 @@ class DeleteWorkoutView(DeleteView):
 
     def get_success_url(self):
         return reverse('workouts-list')
+
+class WorkoutView(DetailView):
+    
+    model = Workout
+    template_name = 'workout.html'

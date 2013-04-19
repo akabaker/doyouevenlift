@@ -19,9 +19,13 @@ class Exercise(models.Model):
 
 class Set(models.Model):
     exercise = models.ForeignKey(Exercise)
-    reps = models.IntegerField(max_length=2)
     max_reps = models.IntegerField(max_length=2)
-    date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.max_reps
+
+class ExerciseSet(models.Model):
+    exercise = models.ForeignKey(Exercise)
+    reps = models.IntegerField(max_length=2)
+    weight = models.DecimalField(max_digits=3, decimal_places=1)
+    date = models.DateTimeField(auto_now=True)

@@ -1,53 +1,44 @@
-from django.http import HttpResponse
-from django.core.urlresolvers import reverse
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
-from .models import Workout
+from rest_framework import generics
+from rest_framework.decorators import api_view
+from rest_framework.reverse import reverse
+from rest_framework.response import Response
+from journal.serializers import *
+from .models import Exercise, Set, ExerciseSet, Workout
 
-class ListWorkoutView(ListView):
-    
+@api_view(['GET'])
+def api_root(request, format=None):
+    """
+    The entry endpoint of our API.
+    """
+    return Response({
+        'workouts': reverse('workout-list', request=request),
+        'exercise': reverse('exercise-list', request=request),
+    })
+
+class WorkoutList(generics.ListCreateAPIView):
+    """
+    API endpoint that represents a list of users.
+    """
     model = Workout
-    template_name = 'workout_list.html'
+    serializer_class = WorkoutSerializer
 
-class CreateWorkoutView(CreateView):
-
+class WorkoutDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+    API endpoint that represents a single user.
+    """
     model = Workout
-    template_name = 'edit_workout.html'
+    serializer_class = WorkoutSerializer
 
-    def get_success_url(self):
-        return reverse('workouts-list')
+class ExerciseList(generics.ListCreateAPIView):
+    """
+    API endpoint that represents a list of users.
+    """
+    model = Exercise
+    serializer_class = ExerciseSerializer
 
-    def get_context_data(self, **kwargs):
-
-        context = super(CreateWorkoutView, self).get_context_data(**kwargs)
-        context['action'] = reverse('workouts-new')
-
-        return context
-
-class UpdateWorkoutView(UpdateView):
-    
-    model = Workout
-    template_name = 'edit_workout.html'
-
-    def get_success_url(self):
-        return reverse('workouts-list')
-
-    def get_context_data(self, **kwargs):
-        
-        context = super(UpdateWorkoutView, self).get_context_data(**kwargs)
-        context['action'] = reverse('workouts-edit',
-                                    kwargs={'pk': self.get_object().id})
-
-        return context
-
-class DeleteWorkoutView(DeleteView):
-    
-    model = Workout
-    template_name = 'delete_workout.html'
-
-    def get_success_url(self):
-        return reverse('workouts-list')
-
-class WorkoutView(DetailView):
-    
-    model = Workout
-    template_name = 'workout.html'
+class ExerciseDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+    API endpoint that represents a single user.
+    """
+    model = Exercise
+    serializer_class = ExerciseSerializer

@@ -12,7 +12,7 @@ class Workout(models.Model):
 
 class Exercise(models.Model):
     name = models.CharField(max_length=255)
-    workout = models.ForeignKey(Workout)
+    workout = models.ForeignKey(Workout, related_name='exercises')
 
     def __str__(self):
         return self.name

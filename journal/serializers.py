@@ -6,19 +6,22 @@ class WorkoutSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Workout
-        fields = ('name','exercises')
+        fields = ('workout_name','exercises')
 
-class ExerciseSerializer(serializers.HyperlinkedModelSerializer):
+class ExerciseSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Exercise
-        fields = ('name', 'workout')
+        fields = ('exercise_name', 'workout')
 
-class SetSerializer(serializers.HyperlinkedModelSerializer):
+class SetSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Set
         fields = ('exercise', 'max_reps')
 
-class ExerciseSet(serializers.HyperlinkedModelSerializer):
+class ExerciseSetSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = ExerciseSet
-        fields = ('exercise', 'reps', 'weight', 'date')
+        fields = ('exercise', 'reps', 'weight', 'date', 'set')

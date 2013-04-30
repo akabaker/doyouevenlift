@@ -17,6 +17,7 @@ DATABASES = {
 INSTALLED_APPS += (
     'journal',
     'rest_framework',
+    #'south',
 )
 
 REST_FRAMEWORK = {

@@ -1,6 +1,7 @@
 Django==1.5
 Markdown==2.3.1
 PyYAML==3.10
+South==0.7.6
 django-filter==0.6
 djangorestframework==2.2.7
 ipython==0.13.2
